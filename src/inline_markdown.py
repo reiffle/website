@@ -25,7 +25,7 @@ def split_nodes_image(old_nodes):
     new_nodes=[]
     for old_node in old_nodes:
         if old_node.text_type!=TextType.TEXT:
-            new_nodes.append(node)
+            new_nodes.append(old_node)
             continue
         images=extract_markdown_images(old_node.text) #Get the exact image text and link
         original_text=old_node.text
@@ -47,7 +47,7 @@ def split_nodes_image(old_nodes):
             )
             original_text=sections[1] #Add the text after the image
         if original_text !="":
-            new_nodes.append(original_text, TextType.TEXT) #Add final text
+            new_nodes.append(TextNode(original_text, TextType.TEXT)) #Add final text
     return new_nodes
 
 def split_nodes_link(old_nodes):
@@ -72,6 +72,17 @@ def split_nodes_link(old_nodes):
         if original_text != "":
             new_nodes.append(TextNode(original_text, TextType.TEXT))
     return new_nodes
+
+def text_to_textnodes(text):
+
+    new_nodes = [TextNode(text, TextType.TEXT)]
+    new_nodes = split_nodes_delimiter(new_nodes, "**", TextType.BOLD)
+    new_nodes = split_nodes_delimiter(new_nodes, "*", TextType.ITALIC)
+    new_nodes = split_nodes_delimiter(new_nodes, "`", TextType.CODE)
+    new_nodes = split_nodes_image(new_nodes)
+    new_nodes = split_nodes_link(new_nodes)
+    return new_nodes
+
 
 def extract_markdown_images(text):
     pattern = r"!\[([^\[\]]*)\]\(([^\(\)]*)\)"
