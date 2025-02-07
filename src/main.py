@@ -1,5 +1,4 @@
 from textnode import *
-from extract_markdown import *
 
 t_type=TextType.BOLD
 def main():
