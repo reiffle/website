@@ -29,7 +29,7 @@ class HTMLNode:
         return f"HTMLNode:({self.tag}, {self.value}, children: {self.children}, {self.props})"
     
 class LeafNode(HTMLNode):
-    def __init__(self, tag, value, props=None):
+    def __init__(self, tag, value, props=None): #tag is the property (paragraph, bold, etc), value is the text inside it
         super().__init__(tag, value, None, props)
 
     def to_html(self):
@@ -43,7 +43,7 @@ class LeafNode(HTMLNode):
         return f"LeafNode:({self.tag}, {self.value}, {self.props})"
 
 class ParentNode(HTMLNode):
-    def __init__(self, tag, children, props=None):
+    def __init__(self, tag, children, props=None): #tag is the property (paragraph, bold, etc), children is a LIST!!! of HTMLNodes
         super().__init__(tag, None, children, props)
 
     def to_html(self):
@@ -52,7 +52,7 @@ class ParentNode(HTMLNode):
         if self.children==None:
             raise ValueError("All parent nodes must have children")
         children="".join(child.to_html()for child in self.children)
-        return f"<{self.tag}{self.props_to_html()}>{children}</{self.tag}>"
+        return f"<{self.tag}{self.props_to_html()}>{children}</{self.tag}>" #This returns the actual html code of the markdown file
 
 
     def __repr__(self):
