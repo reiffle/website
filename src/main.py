@@ -1,9 +1,9 @@
-from textnode import *
-
-t_type=TextType.BOLD
+from copy_files import copy_from_source_to_target
 def main():
-    test_node= TextNode("My Name Is Lucca", t_type, "http://www.wtf.com")
-    print (test_node)
+    copy_from_source_to_target()
+
+
+
 
 
 main()
