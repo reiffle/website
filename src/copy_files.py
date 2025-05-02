@@ -4,7 +4,7 @@ import shutil
 from block_markdown import markdown_to_blocks
 from block_markdown import markdown_to_html_node
 
-def copy_from_source_to_target(source="/home/pederreiff/workspace/github.com/reiffle/website/static", target="/home/pederreiff/workspace/github.com/reiffle/website/public"):
+def copy_from_source_to_target(source="/home/pederreiff/workspace/github.com/reiffle/website/static", target="/home/pederreiff/workspace/github.com/reiffle/website/docs"):
     #check if source and target exist
     if not os.path.exists(source):
         raise Exception (f"The source path: {source} does not exist")
